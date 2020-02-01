@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Posts</title>
+{% endblock %}
+
+{% block body %}
+    <div class="mt-5 mb-5">
+        <h2 style="display:inline">All Post</h2>
+        <a style="display:inline" class="btn btn-success float-right" href="/posts/new">+ New Post</a>
+    </div>
+    <hr>
+    {% for post in posts %}
+        <div class="mt-3 mb-3">
+        <h2>{{ post.title }}</h2>
+            {% if post.author %}
+                <small>By: Written by <b>{{ post.author }}</b> on {{ post.date_posted }}</small>
+            {% else %}
+                <small>By: Written by <b>unknown</b> on {{ post.date_posted }}</small>
+            {%  endif %}
+        </div>
+        <div class="mt-3">
+            <p style="white-space: pre-wrap">{{ post.content }}</p>
+        </div>
+        <div class="mt-5">
+            <a class="btn btn-danger" href="/posts/delete/{{ post.id }}">Delete</a>
+            <a class="btn btn-primary" href="/posts/edit/{{ post.id }}">Edit</a>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
